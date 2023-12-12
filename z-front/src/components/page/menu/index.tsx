@@ -2,6 +2,7 @@ import Link from "next/link";
 import ZLogo from "@/images/z.png";
 import Image from "next/image";
 import { HomeIcon, LogOut, UserRound } from "lucide-react";
+import { TweetDialog } from "@/components/tweet-dialog";
 
 export function PageMenu() {
     return (
@@ -45,6 +46,10 @@ export function PageMenu() {
                     </div>
                     <div>Sair</div>
                 </Link>
+
+                <div className="m-auto w-full">
+                    <TweetDialog />
+                </div>
             </div>
         </nav>
     );
