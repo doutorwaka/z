@@ -1,4 +1,5 @@
 import { PageMenu } from "@/components/page/menu";
+import { PageSearch } from "@/components/page/search";
 import React from "react";
 
 export default function PageLayout({
@@ -11,8 +12,12 @@ export default function PageLayout({
             <div className="sticky top-0 flex mx-4 max-w-[200px]">
                 <PageMenu />
             </div>
-            {children}
-            <div className="sticky top-0 flex w-full max-w-[320px]">BUSCA</div>
+            <div className="flex w-full max-w-[680px]">
+                {children}
+            </div>
+            <div className="sticky top-0 w-full max-w-[320px]">
+                <PageSearch />
+            </div>
         </div>
     );
 }
