@@ -1,4 +1,5 @@
 import { SplitedContainer } from "@/components/splited-container";
+import { Tweet } from "@/components/tweet";
 import { TweetForm } from "@/components/tweet-form";
 
 export default function HomePage() {
@@ -8,7 +9,9 @@ export default function HomePage() {
                 <TweetForm />
             </div>
 
-            <div className="border-muted border-x-[1px]">Tweets</div>
+            <div className="border-muted border-x-[1px]">
+                <Tweet/>
+            </div>
         </div>
     );
 }
