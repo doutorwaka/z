@@ -18,7 +18,7 @@ export function PageMenu() {
                 </Link>
 
                 <Link
-                    href="/"
+                    href="/home"
                     className="flex gap-4 rounded-full p-4 hover:bg-menu-hover text-lg"
                 >
                     <div>
@@ -28,7 +28,7 @@ export function PageMenu() {
                 </Link>
 
                 <Link
-                    href="/"
+                    href="/profile"
                     className="flex gap-4 rounded-full p-4 hover:bg-menu-hover text-lg"
                 >
                     <div>

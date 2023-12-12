@@ -8,14 +8,14 @@ export default function PageLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="relative flex justify-center item-start w-[1200px] m-auto">
+        <div className="relative flex justify-center items-start w-[1200px] m-auto">
             <div className="sticky top-0 flex mx-4 max-w-[200px]">
                 <PageMenu />
             </div>
             <div className="flex w-full max-w-[680px]">
                 {children}
             </div>
-            <div className="sticky top-0 w-full max-w-[320px]">
+            <div className="sticky top-0 flex w-full max-w-[320px]">
                 <PageSearch />
             </div>
         </div>
