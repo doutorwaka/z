@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/utils/utils";
 
 export const metadata: Metadata = {
     title: "Z :: Sua plataforma social!",
@@ -21,7 +22,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="pt-BR">
-            <body className={roboto.variable}>{children}</body>
+            <body className={cn("min-h-screen bg-background font-roboto antialiased", roboto.className)}>{children}</body>
         </html>
     );
 }
