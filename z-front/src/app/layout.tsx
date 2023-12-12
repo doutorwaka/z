@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/utils/utils";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 export const metadata: Metadata = {
     title: "Z :: Sua plataforma social!",
@@ -22,7 +23,21 @@ export default function RootLayout({
 }) {
     return (
         <html lang="pt-BR">
-            <body className={cn("min-h-screen bg-background font-roboto antialiased", roboto.className)}>{children}</body>
+            <body
+                className={cn(
+                    "min-h-screen bg-background font-roboto antialiased",
+                    roboto.className
+                )}
+            >
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="dark"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    {children}
+                </ThemeProvider>
+            </body>
         </html>
     );
 }
