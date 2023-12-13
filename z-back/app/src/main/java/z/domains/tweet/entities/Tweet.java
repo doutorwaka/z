@@ -154,7 +154,7 @@ public class Tweet {
         this.likes++;
     }
 
-    public void dislike() {
+    public void unlike() {
         this.likes--;
     }
 
