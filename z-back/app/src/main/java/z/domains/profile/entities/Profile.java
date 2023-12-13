@@ -1,4 +1,4 @@
-package z.domains.profile;
+package z.domains.profile.entities;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package z.domains.tweet;
+package z.domains.tweet.entities;
 
 import java.time.Instant;
 import java.util.UUID;
