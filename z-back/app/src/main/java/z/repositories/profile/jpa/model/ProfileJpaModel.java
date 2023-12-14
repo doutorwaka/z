@@ -29,7 +29,7 @@ public class ProfileJpaModel {
     private String email;
     @Column(name = "login", unique = true, nullable = false)
     private String login;
-    @ManyToMany(targetEntity = ProfileJpaModel.class, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = ProfileJpaModel.class, cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinTable(name = "profile_follow", joinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "followed_id", referencedColumnName = "id"), uniqueConstraints = {
             @UniqueConstraint(columnNames = { "follower_id", "followed_id" })
     })

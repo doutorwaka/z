@@ -1,0 +1,12 @@
+###
+POST http://localhost:8000/profiles/create
+Content-Type: application/json
+
+{
+    "name":"Doutor Waka",
+    "login":"doutorwaka",
+    "email":"doutorwaka@gmail.com"
+}
+
+###
+GET http://localhost:8000/profiles/doutorwaka
