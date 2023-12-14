@@ -1,6 +1,7 @@
 package z.repositories.profile.jpa.model;
 
 import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,8 +11,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import z.repositories.tweet.jpa.model.TweetJpaModel;
 
 @Entity(name = "Profile")
 @Table(name = "profiles")
@@ -32,6 +35,14 @@ public class ProfileJpaModel {
     })
     private Set<ProfileJpaModel> follows;
 
+    @OneToMany(
+        targetEntity = TweetJpaModel.class,
+        cascade = CascadeType.REMOVE,
+        fetch = FetchType.LAZY,
+        mappedBy = "id"
+    )
+    private List<TweetJpaModel> tweets;
+
     public ProfileJpaModel() {
 
     }
@@ -42,19 +53,17 @@ public class ProfileJpaModel {
      * @param email
      * @param login
      * @param follows
-     * @param followed
+     * @param tweets
      */
     public ProfileJpaModel(String id, String name, String email, String login, Set<ProfileJpaModel> follows,
-            Set<ProfileJpaModel> followed) {
+            List<TweetJpaModel> tweets) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.login = login;
         this.follows = follows;
-        this.followed = followed;
+        this.tweets = tweets;
     }
-
-    private Set<ProfileJpaModel> followed;
 
     /**
      * @return the id
@@ -113,17 +122,33 @@ public class ProfileJpaModel {
     }
 
     /**
-     * @return the followed
+     * @return the follows
      */
-    public Set<ProfileJpaModel> getFollowed() {
-        return followed;
+    public Set<ProfileJpaModel> getFollows() {
+        return follows;
     }
 
     /**
-     * @param followed the followed to set
+     * @param follows the follows to set
      */
-    public void setFollowed(Set<ProfileJpaModel> followed) {
-        this.followed = followed;
+    public void setFollows(Set<ProfileJpaModel> follows) {
+        this.follows = follows;
     }
+
+    /**
+     * @return the tweets
+     */
+    public List<TweetJpaModel> getTweets() {
+        return tweets;
+    }
+
+    /**
+     * @param tweets the tweets to set
+     */
+    public void setTweets(List<TweetJpaModel> tweets) {
+        this.tweets = tweets;
+    }
+
+    
 
 }
