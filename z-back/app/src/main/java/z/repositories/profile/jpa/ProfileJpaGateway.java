@@ -1,6 +1,7 @@
 package z.repositories.profile.jpa;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import z.domains.profile.entities.Profile;
 import z.domains.profile.gateway.ProfileGateway;
@@ -50,21 +51,38 @@ public class ProfileJpaGateway implements ProfileGateway {
     }
 
     @Override
-    public Profile findByLogin(String login) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByLogin'");
+    public Profile findByLogin(final String login) {
+        final var aProfileModel = this.profileRepository.findByLogin(login).orElse(null);
+
+        if (aProfileModel == null) {
+            return null;
+        }
+
+        return ProfileJpaModelToProfileMapper.mapper(aProfileModel);
     }
 
     @Override
-    public List<Profile> searchByLogin(String login) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchByLogin'");
+    public List<Profile> searchByLogin(final String login) {
+        final var profilesModel = this.profileRepository.findByLoginContains(login);
+
+        final var profiles = profilesModel
+            .stream()
+            .map(ProfileJpaModelToProfileMapper::mapper)
+            .collect(Collectors.toList());
+
+        return profiles;
     }
 
     @Override
-    public List<Profile> findFollowedByProfileId(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findFollowedByProfileId'");
+    public List<Profile> findFollowedByProfileId(final String id) {
+        final var followsModel = this.profileRepository.findFollowsByProfileId(id);
+
+        final var follows = followsModel
+            .stream()
+            .map(ProfileJpaModelToProfileMapper::mapper)
+            .collect(Collectors.toList());
+
+        return follows;
     }
 
 }
