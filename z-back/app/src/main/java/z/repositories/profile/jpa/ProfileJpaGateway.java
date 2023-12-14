@@ -4,6 +4,7 @@ import java.util.List;
 
 import z.domains.profile.entities.Profile;
 import z.domains.profile.gateway.ProfileGateway;
+import z.repositories.profile.jpa.mapper.ProfileJpaModelToProfileMapper;
 import z.repositories.profile.jpa.mapper.ProfileToProfileJpaModelMapper;
 
 public class ProfileJpaGateway implements ProfileGateway {
@@ -32,15 +33,20 @@ public class ProfileJpaGateway implements ProfileGateway {
     }
 
     @Override
-    public void update(Profile profile) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void update(final Profile profile) {
+        final var profileJpaModel = ProfileToProfileJpaModelMapper.mapper(profile);
+        this.profileRepository.save(profileJpaModel);
     }
 
     @Override
-    public Profile findById(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    public Profile findById(final String id) {
+        final var aProfileModel = this.profileRepository.findById(id).orElse(null);
+
+        if (aProfileModel == null) {
+            return null;
+        }
+
+        return ProfileJpaModelToProfileMapper.mapper(aProfileModel);
     }
 
     @Override
