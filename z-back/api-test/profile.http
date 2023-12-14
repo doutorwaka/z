@@ -9,4 +9,30 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8000/profiles/create
+Content-Type: application/json
+
+{
+    "name":"Pedro",
+    "login":"paferreira",
+    "email":"paferreira@gmail.com"
+}
+
+###
 GET http://localhost:8000/profiles/doutorwaka
+
+###
+POST http://localhost:8000/profiles/doutorwaka/follow
+Content-Type: application/json
+
+{
+    "followed":"paferreira"
+}
+
+###
+POST http://localhost:8000/profiles/doutorwaka/unfollow
+Content-Type: application/json
+
+{
+    "followed":"paferreira"
+}

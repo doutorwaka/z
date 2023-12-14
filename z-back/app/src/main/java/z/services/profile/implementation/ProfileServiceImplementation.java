@@ -45,6 +45,26 @@ public class ProfileServiceImplementation implements ProfileService{
     }
 
     @Override
+    public Profile unfollow(String followerLogin, String followedLogin) {
+        final var aFollowerProfile = this.profileGateway.findByLogin(followerLogin);
+        final var aFollowedProfile = this.profileGateway.findByLogin(followedLogin);
+
+        if(aFollowerProfile == null){
+            throw new IllegalArgumentException("Follower not found");
+        }
+
+        if(aFollowedProfile == null){
+            throw new IllegalArgumentException("Followed not found");
+        }
+
+        aFollowerProfile.unfollow(aFollowedProfile);
+
+        this.profileGateway.update(aFollowerProfile);
+
+        return aFollowerProfile;
+    }
+
+    @Override
     public Profile create(final String aName, final String aLogin, final String anEmail) {
         final var existentProfile = this.profileGateway.findByLogin(aLogin);
 
