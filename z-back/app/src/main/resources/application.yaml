@@ -1,2 +1,13 @@
 server:
     port: 8000
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/z
+        username: z
+        password: z
+    jpa:
+        show-sql: true
+        open-in-view: false
+        hibernate:
+            ddl-auto: create
