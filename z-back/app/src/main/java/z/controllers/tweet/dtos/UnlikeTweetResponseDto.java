@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record UnlikeTweetResponseDto(
         String id,
-        String message,
+        String content,
         @JsonProperty("author_id") String authorId,
         @JsonProperty("author_login") String authorLogin,
         int likes,

@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import z.controllers.tweet.dtos.CreateTweetRequestDto;
 import z.controllers.tweet.dtos.CreateTweetResponseDto;
 import z.controllers.tweet.dtos.LikeTweetResponseDto;
+import z.controllers.tweet.dtos.ListFollowsTweetsResponseDto;
+import z.controllers.tweet.dtos.ListTweetResponseDto;
 import z.controllers.tweet.dtos.UnlikeTweetResponseDto;
 import z.controllers.tweet.dtos.ViewTweetResponseDto;
+import z.controllers.tweet.dtos.mappers.ListFollowsTweetsResponseDtoMapper;
+import z.controllers.tweet.dtos.mappers.ListTweetResponseDtoMapper;
 import z.controllers.tweet.dtos.mappers.TweetToCreateTweetResponseDtoMapper;
 import z.controllers.tweet.dtos.mappers.TweetToLikeTweetResponseDtoMapper;
 import z.controllers.tweet.dtos.mappers.TweetToUnlikeTweetResponseDtoMapper;
@@ -84,6 +88,34 @@ public class TweetController {
         final var aTweet = aService.view(id);
 
         final var aResponse = TweetToViewTweetResponseDto.mapper(aTweet);
+
+        return aResponse;
+    }
+
+    @GetMapping("/{login}/list")
+    public ListTweetResponseDto list(@PathVariable("login") final String login) {
+        final var aTweetGateway = TweetJpaGateway.build(this.tweetRepository, this.profileRepository);
+        final var aProfileGateway = ProfileJpaGateway.build(this.profileRepository);
+
+        final var aService = TweetServiceImplementation.build(aTweetGateway, aProfileGateway);
+
+        final var aTweets = aService.findByAuthor(login);
+
+        final var aResponse = ListTweetResponseDtoMapper.mapper(aTweets);
+
+        return aResponse;
+    }
+
+    @GetMapping("/{login}/follows/list")
+    public ListFollowsTweetsResponseDto listFollowsTweets(@PathVariable("login") final String login) {
+        final var aTweetGateway = TweetJpaGateway.build(this.tweetRepository, this.profileRepository);
+        final var aProfileGateway = ProfileJpaGateway.build(this.profileRepository);
+
+        final var aService = TweetServiceImplementation.build(aTweetGateway, aProfileGateway);
+
+        final var aTweets = aService.findByFollowed(login);
+
+        final var aResponse = ListFollowsTweetsResponseDtoMapper.mapper(aTweets);
 
         return aResponse;
     }

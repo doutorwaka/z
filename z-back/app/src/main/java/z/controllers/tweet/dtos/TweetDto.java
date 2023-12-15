@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record ViewTweetResponseDto(
+public record TweetDto(
         String id,
         String content,
         @JsonProperty("author_id") String authorId,

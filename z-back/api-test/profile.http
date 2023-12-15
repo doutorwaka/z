@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8000/profiles/paferreira
+GET http://localhost:8000/profiles/doutorwaka
 
 ###
 POST http://localhost:8000/profiles/doutorwaka/follow

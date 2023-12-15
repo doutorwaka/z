@@ -104,7 +104,7 @@ public class TweetServiceImplementation implements TweetService {
             throw new IllegalArgumentException("Profile not found");
         }
 
-        final var followed = this.profileGateway.findFollowedByProfileId(profileLogin);
+        final var followed = this.profileGateway.findFollowedByProfileId(profile.getId());
 
         final var unorderedTweets = followed.stream()
                 .map(followedProfile -> this.tweetGateway.findByAuthorId(followedProfile.getId()))
