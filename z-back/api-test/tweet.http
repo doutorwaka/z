@@ -1,0 +1,17 @@
+###
+POST http://localhost:8000/tweets/create
+Content-Type: application/json
+
+{
+    "author_login":"paferreira",
+    "content": "Hello world"
+}
+
+###
+GET http://localhost:8000/tweets/82311adb-b0d6-4f93-a51c-251ad8086e69/like
+
+###
+GET http://localhost:8000/tweets/82311adb-b0d6-4f93-a51c-251ad8086e69/unlike
+
+###
+GET http://localhost:8000/tweets/82311adb-b0d6-4f93-a51c-251ad8086e69/view

@@ -1,4 +1,4 @@
-package z.controllers.profile.dtos.mapper;
+package z.controllers.profile.dtos.mappers;
 
 import java.util.List;
 import java.util.function.Function;

@@ -1,20 +1,20 @@
-package z.controllers.profile.dtos.mapper;
+package z.controllers.profile.dtos.mappers;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import z.controllers.profile.dtos.FollowProfileResponseDto;
 import z.controllers.profile.dtos.FollowedDto;
+import z.controllers.profile.dtos.UnfollowProfileResponseDto;
 import z.domains.profile.entities.Profile;
 
-public class ProfileToFollowProfileResponseDtoMapper implements Function<Profile, FollowProfileResponseDto> {
+public class ProfileToUnfollowResponseDtoMapper implements Function<Profile, UnfollowProfileResponseDto> {
 
-    public static FollowProfileResponseDto mapper(final Profile aProfile) {
-        return new ProfileToFollowProfileResponseDtoMapper().apply(aProfile);
+    public static UnfollowProfileResponseDto mapper(final Profile aProfile) {
+        return new ProfileToUnfollowResponseDtoMapper().apply(aProfile);
     }
 
     @Override
-    public FollowProfileResponseDto apply(final Profile input) {
+    public UnfollowProfileResponseDto apply(final Profile input) {
         final var followsDto = input.getFollowed()
                 .values()
                 .stream()
@@ -23,7 +23,7 @@ public class ProfileToFollowProfileResponseDtoMapper implements Function<Profile
                 })
                 .collect(Collectors.toList());
 
-        return new FollowProfileResponseDto(
+        return new UnfollowProfileResponseDto(
                 input.getId(),
                 input.getName(),
                 input.getEmail(),
