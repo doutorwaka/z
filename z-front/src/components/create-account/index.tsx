@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { Icons } from "../icons";
+import { Button } from "../ui/button";
 import {
     Card,
     CardContent,
@@ -8,7 +12,6 @@ import {
     CardTitle,
 } from "../ui/card";
 import ZImage from "../../images/z.png";
-import { GithubLoginButton } from "./github-login-button";
 
 export function CreateAccount() {
     return (
@@ -20,7 +23,12 @@ export function CreateAccount() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
-                <GithubLoginButton />
+                <div className="grid grid-cols-1 gap-6">
+                    <Button variant="outline">
+                        <Icons.gitHub className="mr-2 h-6 w-6" />
+                        Github
+                    </Button>
+                </div>
             </CardContent>
             <CardFooter>
                 <Image
