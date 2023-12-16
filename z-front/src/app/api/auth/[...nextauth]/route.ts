@@ -19,12 +19,22 @@ const authOptions: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async redirect({ baseUrl }) {
+        redirect({ baseUrl }) {
             return baseUrl + "/home";
         },
-        async signIn({ user }) {
-            console.log("user", user);
-
+        jwt({ token, profile }) {
+            if (profile) {
+                token.login = profile.login;
+            }
+            return token;
+        },
+        session({ session, token }) {
+            if(token){
+              session.user.login = token.login;
+            }
+            return session;
+        },
+        signIn({ user }) {
             return true;
         },
     },
