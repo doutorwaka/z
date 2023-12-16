@@ -1,5 +1,4 @@
 import { CreateAccount } from '@/components/create-account'
-import Image from 'next/image'
 
 export default function Home() {
   return (
