@@ -69,7 +69,7 @@ public class ProfileServiceImplementation implements ProfileService{
         final var existentProfile = this.profileGateway.findByLogin(aLogin);
 
         if (existentProfile != null) {
-            throw new IllegalArgumentException("Login already exists");
+            return existentProfile;
         }
 
         final var aProfile = Profile.build(aName, anEmail, aLogin);
