@@ -7,13 +7,27 @@ const authOptions: NextAuthOptions = {
         GithubProvider({
             clientId: process.env.GITHUB_ID || "",
             clientSecret: process.env.GITHUB_SECRET || "",
+            profile: (profile) => {
+                return {
+                    id: profile.id,
+                    name: profile.name,
+                    email: profile.email,
+                    image: profile.avatar_url,
+                    login: profile.login,
+                };
+            },
         }),
     ],
     callbacks: {
-      async redirect({baseUrl}){
-        return baseUrl + "/home";
-      }
-    }
+        async redirect({ baseUrl }) {
+            return baseUrl + "/home";
+        },
+        async signIn({ user }) {
+            console.log("user", user);
+
+            return true;
+        },
+    },
 };
 
 const handler = NextAuth(authOptions);
