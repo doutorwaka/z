@@ -3,6 +3,7 @@ import ZLogo from "@/images/z.png";
 import Image from "next/image";
 import { HomeIcon, LogOut, UserRound } from "lucide-react";
 import { TweetDialog } from "@/components/tweet-dialog";
+import { LogoutButton } from "./logout-button";
 
 export function PageMenu() {
     return (
@@ -37,15 +38,7 @@ export function PageMenu() {
                     <div>Perfil</div>
                 </Link>
 
-                <Link
-                    href="/"
-                    className="flex gap-4 rounded-full p-4 hover:bg-menu-hover text-lg"
-                >
-                    <div>
-                        <LogOut />
-                    </div>
-                    <div>Sair</div>
-                </Link>
+                <LogoutButton />
 
                 <div className="m-auto w-full">
                     <TweetDialog />
