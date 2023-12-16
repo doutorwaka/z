@@ -29,8 +29,10 @@ const authOptions: NextAuthOptions = {
             return token;
         },
         session({ session, token }) {
-            if(token){
-              session.user.login = token.login;
+            if (token) {
+                if (token.login) {
+                    session.user.login = token.login;
+                }
             }
             return session;
         },
