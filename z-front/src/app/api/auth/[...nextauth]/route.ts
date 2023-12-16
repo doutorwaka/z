@@ -19,6 +19,9 @@ const authOptions: NextAuthOptions = {
             },
         }),
     ],
+    pages: {
+        error: "/error",
+    },
     callbacks: {
         redirect({ baseUrl }) {
             return baseUrl + "/home";
@@ -38,7 +41,6 @@ const authOptions: NextAuthOptions = {
             return session;
         },
         async signIn({ user }) {
-            
             if (!user) {
                 return false;
             }
@@ -47,9 +49,13 @@ const authOptions: NextAuthOptions = {
             const email = user.email;
             const login = user.login;
 
-            try{
-                await services.auth.createProfileIfNotExists({ name, email, login });
-            } catch (e){
+            try {
+                await services.auth.createProfileIfNotExists({
+                    name,
+                    email,
+                    login,
+                });
+            } catch (e) {
                 return false;
             }
 
