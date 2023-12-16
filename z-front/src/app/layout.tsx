@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/utils/utils";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { NextAuthProvider } from "@/providers/next-auth-provider";
 
 export const metadata: Metadata = {
     title: "Z :: Sua plataforma social!",
@@ -35,7 +36,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    {children}
+                    <NextAuthProvider>{children}</NextAuthProvider>
                 </ThemeProvider>
             </body>
         </html>
