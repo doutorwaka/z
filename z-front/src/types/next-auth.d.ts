@@ -18,6 +18,13 @@ declare module "next-auth" {
         login?: string;
         image?: string;
     }
+
+    interface User {
+        login: string;
+        name: string;
+        email: string;
+        image: string;
+    }
 }
 
 declare module "next-auth/jwt" {

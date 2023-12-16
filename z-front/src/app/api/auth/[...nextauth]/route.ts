@@ -1,3 +1,4 @@
+import { services } from "@/services";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GithubProvider from "next-auth/providers/github";
@@ -36,7 +37,22 @@ const authOptions: NextAuthOptions = {
             }
             return session;
         },
-        signIn({ user }) {
+        async signIn({ user }) {
+            
+            if (!user) {
+                return false;
+            }
+
+            const name = user.name;
+            const email = user.email;
+            const login = user.login;
+
+            try{
+                await services.auth.createProfileIfNotExists({ name, email, login });
+            } catch (e){
+                return false;
+            }
+
             return true;
         },
     },
