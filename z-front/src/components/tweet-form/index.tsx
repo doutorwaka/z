@@ -13,6 +13,7 @@ import {
     FormItem,
     FormMessage,
 } from "../ui/form";
+import { useSession } from "next-auth/react";
 
 const createTweetFormSchema = z.object({
     content: z.string().min(1).max(255),
@@ -21,6 +22,10 @@ const createTweetFormSchema = z.object({
 type CreateTweetFormType = z.infer<typeof createTweetFormSchema>;
 
 export function TweetForm() {
+    const { data: session } = useSession();
+
+    const profileLogin = session?.user.login || "";
+
     const createTweetForm = useForm<CreateTweetFormType>({
         resolver: zodResolver(createTweetFormSchema),
         defaultValues: {
@@ -29,7 +34,9 @@ export function TweetForm() {
     });
 
     function handleCreateTweetFormSubmit({ content }: CreateTweetFormType) {
-        console.log("content", content);
+        const data = { content, profileLogin };
+
+        console.log("data", data);
     }
 
     return (
