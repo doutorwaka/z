@@ -14,6 +14,8 @@ import {
     FormMessage,
 } from "../ui/form";
 import { useSession } from "next-auth/react";
+import { services } from "@/services";
+import { AxiosError } from "axios";
 
 const createTweetFormSchema = z.object({
     content: z.string().min(1).max(255),
@@ -24,7 +26,7 @@ type CreateTweetFormType = z.infer<typeof createTweetFormSchema>;
 export function TweetForm() {
     const { data: session } = useSession();
 
-    const profileLogin = session?.user.login || "";
+    const userLogin = session?.user.login || "";
 
     const createTweetForm = useForm<CreateTweetFormType>({
         resolver: zodResolver(createTweetFormSchema),
@@ -33,10 +35,20 @@ export function TweetForm() {
         },
     });
 
-    function handleCreateTweetFormSubmit({ content }: CreateTweetFormType) {
-        const data = { content, profileLogin };
+    async function handleCreateTweetFormSubmit({
+        content,
+    }: CreateTweetFormType) {
+        const data = { content, userLogin };
 
-        console.log("data", data);
+        try {
+            const response = await services.tweet.create(data);
+            alert("Tweet criado com sucesso!");
+            console.log(response);
+        } catch (e) {
+            const error = e as AxiosError;
+            alert("Erro ao criar tweet!");
+            console.log(error.message);
+        }
     }
 
     return (
