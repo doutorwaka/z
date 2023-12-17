@@ -16,6 +16,8 @@ import {
 import { useSession } from "next-auth/react";
 import { services } from "@/services";
 import { AxiosError } from "axios";
+import { useState } from "react";
+import { FormAlert } from "../form-alert";
 
 const createTweetFormSchema = z.object({
     content: z.string().min(1).max(255),
@@ -27,6 +29,8 @@ export function TweetForm() {
     const { data: session } = useSession();
 
     const userLogin = session?.user.login || "";
+
+    const [message, setMessage] = useState(<></>);
 
     const createTweetForm = useForm<CreateTweetFormType>({
         resolver: zodResolver(createTweetFormSchema),
@@ -42,12 +46,12 @@ export function TweetForm() {
 
         try {
             const response = await services.tweet.create(data);
-            alert("Tweet criado com sucesso!");
-            console.log(response);
+            setMessage(<FormAlert message="Tweet criado com sucesso!" type="success" className="mt-4" />)
         } catch (e) {
             const error = e as AxiosError;
-            alert("Erro ao criar tweet!");
-            console.log(error.message);
+            setMessage(<FormAlert message={error.message} type="error" className="mt-4"/>)
+        } finally {
+            setTimeout(()=>setMessage(<></>), 3500);
         }
     }
 
@@ -81,8 +85,11 @@ export function TweetForm() {
                         />
                     </div>
                     <div className="flex justify-end">
-                        <Button className="w-32 rounded-full">Postar</Button>
+                        <Button className="w-32 rounded-full mt-4">
+                            Postar
+                        </Button>
                     </div>
+                    {message}
                 </form>
             </Form>
         </SplitedContainer>
