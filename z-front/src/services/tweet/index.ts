@@ -35,7 +35,7 @@ export type ListTweetsFromProfileResponseDto = {
         author_login: string;
         likes: number;
         views: number;
-        created_at: string;
+        created_at: Date;
     }[];
 };
 
