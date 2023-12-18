@@ -1,9 +1,10 @@
 import Link from "next/link";
 import ZLogo from "@/images/z.png";
 import Image from "next/image";
-import { HomeIcon, LogOut, UserRound } from "lucide-react";
+import { HomeIcon } from "lucide-react";
 import { TweetDialog } from "@/components/tweet-dialog";
 import { LogoutButton } from "./logout-button";
+import { ProfileButton } from "./perfil-button";
 
 export function PageMenu() {
     return (
@@ -28,15 +29,7 @@ export function PageMenu() {
                     <div>Home</div>
                 </Link>
 
-                <Link
-                    href="/profile"
-                    className="flex gap-4 rounded-full p-4 hover:bg-menu-hover text-lg"
-                >
-                    <div>
-                        <UserRound />
-                    </div>
-                    <div>Perfil</div>
-                </Link>
+                <ProfileButton />
 
                 <LogoutButton />
 
