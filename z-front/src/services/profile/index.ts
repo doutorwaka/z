@@ -26,3 +26,67 @@ export async function getProfile({ profile }: GetProfileProps) {
         throw error;
     }
 }
+
+export type FollowProfileProps = {
+    follower: string;
+    followed: string;
+};
+
+export async function followProfile({
+    follower,
+    followed,
+}: FollowProfileProps) {
+    
+    const data = JSON.stringify({ followed });
+
+    try {
+        await backend.post(`/profiles/${follower}/follow`, data);
+    } catch (e) {
+        const error = e as AxiosError;
+        throw error;
+    }
+}
+
+export type UnfollowProfileProps = {
+    follower: string;
+    followed: string;
+};
+
+export async function unfollowProfile({
+    follower,
+    followed,
+}: UnfollowProfileProps) {
+    
+    const data = JSON.stringify({ followed });
+
+    try {
+        await backend.post(`/profiles/${follower}/unfollow`, data);
+    } catch (e) {
+        const error = e as AxiosError;
+        throw error;
+    }
+}
+
+export type isFollowingProfileProps = {
+    follower: string;
+    followed: string;
+};
+
+export type IsFollowingProfileResponseDto = {
+    is_following: boolean;
+}
+
+export async function isFollowing({
+    follower,
+    followed,
+}: isFollowingProfileProps) {
+
+    try {
+        const response = await backend.get(`/profiles/${follower}/follows/${followed}`);
+        const responseData = response.data as IsFollowingProfileResponseDto;
+        return responseData;
+    } catch (e) {
+        const error = e as AxiosError;
+        throw error;
+    }
+}
