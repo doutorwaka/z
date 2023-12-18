@@ -6,6 +6,7 @@ import {
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { getUserSession } from "@/lib/user-session";
+import { FollowUnfollowButton } from "./follow-unfollow-button";
 
 export type ProfileCardProps = {
     profile: string;
@@ -24,12 +25,7 @@ export async function ProfileCard({ profile }: ProfileCardProps) {
                     {profile === user.login ? (
                         <>{profile}</>
                     ) : (
-                        <Button
-                            variant={"default"}
-                            className="w-full rounded-full"
-                        >
-                            Seguir
-                        </Button>
+                        <FollowUnfollowButton follower={user.login} followed={profile} />
                     )}
                 </SplitedContainer>
             </HoverCardContent>
