@@ -1,18 +1,22 @@
+"use client";
+
 import { SplitedContainer } from "@/components/splited-container";
 import {
     HoverCard,
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { getUserSession } from "@/lib/user-session";
 import { FollowUnfollowButton } from "./follow-unfollow-button";
+import { useSession } from "next-auth/react";
 
 export type ProfileCardProps = {
     profile: string;
 };
 
-export async function ProfileCard({ profile }: ProfileCardProps) {
-    const user = await getUserSession();
+export function ProfileCard({ profile }: ProfileCardProps) {
+    const { data: session } = useSession();
+
+    const userLogin = session?.user.login || "";
 
     return (
         <HoverCard>
@@ -21,10 +25,13 @@ export async function ProfileCard({ profile }: ProfileCardProps) {
             </HoverCardTrigger>
             <HoverCardContent className="w-sm">
                 <SplitedContainer profile={profile}>
-                    {profile === user.login ? (
+                    {profile === userLogin ? (
                         <>{profile}</>
                     ) : (
-                        <FollowUnfollowButton follower={user.login} followed={profile} />
+                        <FollowUnfollowButton
+                            follower={userLogin}
+                            followed={profile}
+                        />
                     )}
                 </SplitedContainer>
             </HoverCardContent>

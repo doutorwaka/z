@@ -8,7 +8,7 @@ import { ProfileDto } from "@/services/profile";
 import { Search } from "lucide-react";
 import { useState } from "react";
 
-async function searchProfile(profile: string) {
+async function searchProfiles(profile: string) {
     try {
         const { profiles } = await services.profile.search({ profile });
         return profiles;
@@ -19,6 +19,16 @@ async function searchProfile(profile: string) {
 
 export function PageSearch() {
     const [profiles, setProfiles] = useState<ProfileDto[]>([]);
+
+    async function handleSearch(profile: string){
+        if(profile === ""){
+            setProfiles([]);
+            return;
+        }
+
+        const profiles = await searchProfiles(profile);
+        setProfiles(profiles);
+    }
 
     function generateProfileCads(profiles: ProfileDto[]) {
         return profiles.map((profile) => {
@@ -37,6 +47,7 @@ export function PageSearch() {
                 <Input
                     placeholder="Busque alguém para seguir..."
                     className="pl-12 rounded-full font-light text-lg"
+                    onChange={(e)=>handleSearch(e.target.value)}
                 />
             </div>
             {generateProfileCads(profiles)}
