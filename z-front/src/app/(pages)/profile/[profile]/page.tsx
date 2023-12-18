@@ -1,26 +1,19 @@
-"use client";
-
-import { TweetsFromProfile } from "@/components/tweets/from-profile";
+import { Tweets } from "@/components/tweets";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { services } from "@/services";
-import { GetProfileResponseDto } from "@/services/profile";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
-export default function ProfilePage() {
-    const { profile } = useParams();
+export default async function ProfilePage({
+    params,
+}: {
+    params: { profile: string };
+}) {
+    const { profile } = params;
 
-    const [profileData, setProfileData] = useState<GetProfileResponseDto>();
-
-    useEffect(() => {
-        services.profile
-            .get({ profile: profile.toString() })
-            .then((response) => {
-                setProfileData(response);
-            });
-    }, [profile]);
+    const profileData = await services.profile.get({ profile });
 
     const profileAvatarSrc = `http://github.com/${profile}.png`;
+
+    const { tweets } = await services.tweet.listFromProfile({ profile });
 
     const avatar = (
         <Avatar className="relative top-20 left-4 h-48 w-48 text-[80px]">
@@ -49,7 +42,7 @@ export default function ProfilePage() {
                 </div>
             </div>
 
-            <TweetsFromProfile profile={profile.toString()} />
+            <Tweets tweets={tweets} />
         </div>
     );
 }

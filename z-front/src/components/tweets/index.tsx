@@ -1,13 +1,11 @@
-import { Tweet } from "@/components/tweet";
+import { Tweet, TweetProps } from "@/components/tweet";
 import { services } from "@/services";
 
-export type TweetsFromProfileProps = {
-    profile: string;
+export type TweetsProps = {
+    tweets: TweetProps[];
 };
 
-export async function TweetsFromProfile({ profile }: TweetsFromProfileProps) {
-    const { tweets } = await services.tweet.listFromProfile({ profile });
-
+export function Tweets({ tweets }: TweetsProps) {
     const tweetsComponents = tweets.map((tweet) => {
         return (
             <Tweet
@@ -23,5 +21,5 @@ export async function TweetsFromProfile({ profile }: TweetsFromProfileProps) {
         );
     });
 
-    return { tweetsComponents };
+    return <>{tweetsComponents}</>;
 }

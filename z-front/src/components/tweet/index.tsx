@@ -15,7 +15,9 @@ export type TweetProps = {
 function formatDate(date: Date) {
     const today = new Date();
 
-    const diffMs = today.getTime() - date.getTime();
+    const receivedDate = new Date(date);
+
+    const diffMs = today.getTime() - receivedDate.getTime();
 
     if (diffMs < 1000 * 60 * 60) {
         return `${Math.floor(diffMs / (1000 * 60))}m`; // minutes
@@ -24,7 +26,7 @@ function formatDate(date: Date) {
     } else if (diffMs < 1000 * 60 * 60 * 24 * 30) {
         return `${Math.floor(diffMs / (1000 * 60 * 60 * 24))}d`; // days
     } else {
-        return date.toLocaleDateString();
+        return receivedDate.toLocaleDateString();
     }
 }
 
