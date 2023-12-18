@@ -5,7 +5,7 @@ export type TweetsFromProfileProps = {
     profile: string;
 };
 
-export function TweetsFromProfile({ profile }: TweetsFromProfileProps) {
+export async function TweetsFromProfile({ profile }: TweetsFromProfileProps) {
     const { tweets } = await services.tweet.listFromProfile({ profile });
 
     const tweetsComponents = tweets.map((tweet) => {
