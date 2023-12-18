@@ -10,6 +10,7 @@ import {
     createTweet,
     listTweetsFromFollows,
     listTweetsFromProfile,
+    viewTweet,
 } from "./tweet";
 
 export const services = {
@@ -20,6 +21,7 @@ export const services = {
         create: createTweet,
         listFromProfile: listTweetsFromProfile,
         listFromFollows: listTweetsFromFollows,
+        view: viewTweet,
     },
     profile: {
         get: getProfile,

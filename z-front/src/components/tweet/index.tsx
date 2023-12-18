@@ -1,6 +1,7 @@
 import { MessageCircle, Repeat2, Heart, BarChart2 } from "lucide-react";
 import { SplitedContainer } from "../splited-container";
 import { ProfileCard } from "./profile-card";
+import { services } from "@/services";
 
 export type TweetProps = {
     id: string;
@@ -30,15 +31,31 @@ function formatDate(date: Date) {
     }
 }
 
+async function addView(tweetId: string) {
+    try {
+        await services.tweet.view({ id: tweetId });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export function Tweet(props: TweetProps) {
+    addView(props.id);
+
     return (
-        <SplitedContainer className="border-b-2 border-muted" profile={props.author_login}>
+        <SplitedContainer
+            className="border-b-2 border-muted"
+            profile={props.author_login}
+        >
             <div className="flex flex-col w-full gap-2">
                 <div>
                     <span className="underline">
                         <ProfileCard profile={props.author_login} />
                     </span>
-                    <span className="font-light"> {formatDate(props.created_at)}</span>
+                    <span className="font-light">
+                        {" "}
+                        {formatDate(props.created_at)}
+                    </span>
                 </div>
 
                 <div>{props.content}</div>

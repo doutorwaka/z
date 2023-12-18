@@ -76,3 +76,15 @@ export async function listTweetsFromFollows({
         throw e;
     }
 }
+
+export type ViewTweetProps = {
+    id: string;
+};
+
+export async function viewTweet({ id }: ViewTweetProps) {
+    try {
+        await backend.get(`/tweets/${id}/view`);
+    } catch (error) {
+        throw error;
+    }
+}
