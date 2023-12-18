@@ -2,7 +2,6 @@
 
 import { backend } from "@/lib/requests";
 import { revalidatePath } from "next/cache";
-import { string } from "zod";
 
 export type CreateTweetProps = {
     content: string;
@@ -84,6 +83,30 @@ export type ViewTweetProps = {
 export async function viewTweet({ id }: ViewTweetProps) {
     try {
         await backend.get(`/tweets/${id}/view`);
+    } catch (error) {
+        throw error;
+    }
+}
+
+export type LikeTweetProps = {
+    id: string;
+};
+
+export async function likeTweet({ id }: LikeTweetProps) {
+    try {
+        await backend.get(`/tweets/${id}/like`);
+    } catch (error) {
+        throw error;
+    }
+}
+
+export type UnlikeTweetProps = {
+    id: string;
+};
+
+export async function unlikeTweet({ id }: UnlikeTweetProps) {
+    try {
+        await backend.get(`/tweets/${id}/unlike`);
     } catch (error) {
         throw error;
     }

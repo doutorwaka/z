@@ -8,8 +8,10 @@ import {
 } from "./profile";
 import {
     createTweet,
+    likeTweet,
     listTweetsFromFollows,
     listTweetsFromProfile,
+    unlikeTweet,
     viewTweet,
 } from "./tweet";
 
@@ -22,6 +24,8 @@ export const services = {
         listFromProfile: listTweetsFromProfile,
         listFromFollows: listTweetsFromFollows,
         view: viewTweet,
+        like: likeTweet,
+        unlike: unlikeTweet,
     },
     profile: {
         get: getProfile,
