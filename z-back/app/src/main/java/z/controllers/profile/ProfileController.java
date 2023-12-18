@@ -77,7 +77,7 @@ public class ProfileController {
     }
 
     @PostMapping("/{login}/unfollow")
-    public UnfollowProfileResponseDto follow(@PathVariable("login") final String login,
+    public UnfollowProfileResponseDto unfollow(@PathVariable("login") final String login,
             @RequestBody final UnfollowProfileRequestDto request) {
         final var aGateway = ProfileJpaGateway.build(this.profileRepository);
         final var aService = ProfileServiceImplementation.build(aGateway);
