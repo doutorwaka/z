@@ -4,16 +4,18 @@ import { cn } from "@/utils/utils";
 
 export type SplitedContainerProps = {
     children: React.ReactNode;
+    profile: string;
     className?: string;
 };
 
 export function SplitedContainer({
     children,
+    profile,
     className = "",
 }: SplitedContainerProps) {
     const profileAvatar = (
         <Avatar>
-            <AvatarImage src="http://github.com/doutorwaka.png" />
+            <AvatarImage src={`http://github.com/${profile}.png`} />
             <AvatarFallback>D</AvatarFallback>
         </Avatar>
     );

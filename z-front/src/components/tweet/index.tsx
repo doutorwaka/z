@@ -32,7 +32,7 @@ function formatDate(date: Date) {
 
 export function Tweet(props: TweetProps) {
     return (
-        <SplitedContainer className="border-b-2 border-muted">
+        <SplitedContainer className="border-b-2 border-muted" profile={props.author_login}>
             <div className="flex flex-col w-full gap-2">
                 <div>
                     <span className="underline">

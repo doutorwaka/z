@@ -56,7 +56,7 @@ export function TweetForm() {
     }
 
     return (
-        <SplitedContainer>
+        <SplitedContainer profile={userLogin}>
             <Form {...createTweetForm}>
                 <form
                     onSubmit={createTweetForm.handleSubmit(

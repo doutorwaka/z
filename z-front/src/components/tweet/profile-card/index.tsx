@@ -12,7 +12,7 @@ export function ProfileCard({profile}: ProfileCardProps){
         <HoverCard>
             <HoverCardTrigger className="cursor-pointer">{profile}</HoverCardTrigger>
             <HoverCardContent className="w-sm">
-                <SplitedContainer>
+                <SplitedContainer profile={profile}>
                     <Button variant={"default"} className="w-full rounded-full">Seguir</Button>
                 </SplitedContainer>
             </HoverCardContent>
