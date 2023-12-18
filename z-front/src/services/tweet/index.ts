@@ -1,6 +1,7 @@
 "use server";
 
 import { backend } from "@/lib/requests";
+import { revalidatePath } from "next/cache";
 import { string } from "zod";
 
 export type CreateTweetProps = {
@@ -17,6 +18,7 @@ export async function createTweet({ content, userLogin }: CreateTweetProps) {
     try {
         const response = await backend.post("/tweets/create", data);
         const responseData = await response.data;
+        revalidatePath("/profile");
         return responseData;
     } catch (e) {
         throw e;

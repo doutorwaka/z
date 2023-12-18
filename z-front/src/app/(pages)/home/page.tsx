@@ -1,4 +1,3 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { TweetForm } from "@/components/tweet-form";
 import { Tweets } from "@/components/tweets";
 import { getUserSession } from "@/lib/user-session";
