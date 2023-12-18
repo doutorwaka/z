@@ -18,7 +18,7 @@ export default function ProfilePage() {
             .then((response) => {
                 setProfileData(response);
             });
-    });
+    }, [profile]);
 
     const profileAvatarSrc = `http://github.com/${profile}.png`;
 
