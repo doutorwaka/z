@@ -36,7 +36,6 @@ export async function followProfile({
     follower,
     followed,
 }: FollowProfileProps) {
-    
     const data = JSON.stringify({ followed });
 
     try {
@@ -56,7 +55,6 @@ export async function unfollowProfile({
     follower,
     followed,
 }: UnfollowProfileProps) {
-    
     const data = JSON.stringify({ followed });
 
     try {
@@ -74,16 +72,43 @@ export type isFollowingProfileProps = {
 
 export type IsFollowingProfileResponseDto = {
     is_following: boolean;
-}
+};
 
 export async function isFollowing({
     follower,
     followed,
 }: isFollowingProfileProps) {
+    try {
+        const response = await backend.get(
+            `/profiles/${follower}/follows/${followed}`
+        );
+        const responseData = response.data as IsFollowingProfileResponseDto;
+        return responseData;
+    } catch (e) {
+        const error = e as AxiosError;
+        throw error;
+    }
+}
+
+export type SearchProfileProps = {
+    profile: string;
+};
+
+export type SearchProfileResponseDto = {
+    profiles: {
+        id: string;
+        name: string;
+        email: string;
+        login: string;
+    }[];
+};
+
+export async function searchProfile({ profile }: SearchProfileProps) {
+    const data = JSON.stringify({ login: profile });
 
     try {
-        const response = await backend.get(`/profiles/${follower}/follows/${followed}`);
-        const responseData = response.data as IsFollowingProfileResponseDto;
+        const response = await backend.post(`/profiles/search`, data);
+        const responseData = response.data as SearchProfileResponseDto
         return responseData;
     } catch (e) {
         const error = e as AxiosError;

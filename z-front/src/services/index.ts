@@ -1,6 +1,16 @@
 import { CreateProfileIfNotExists } from "./auth";
-import { followProfile, getProfile, isFollowing, unfollowProfile } from "./profile";
-import { createTweet, listTweetsFromFollows, listTweetsFromProfile } from "./tweet";
+import {
+    followProfile,
+    getProfile,
+    isFollowing,
+    searchProfile,
+    unfollowProfile,
+} from "./profile";
+import {
+    createTweet,
+    listTweetsFromFollows,
+    listTweetsFromProfile,
+} from "./tweet";
 
 export const services = {
     auth: {
@@ -16,5 +26,6 @@ export const services = {
         follow: followProfile,
         unfollow: unfollowProfile,
         isFollowing: isFollowing,
+        search: searchProfile,
     },
 };
