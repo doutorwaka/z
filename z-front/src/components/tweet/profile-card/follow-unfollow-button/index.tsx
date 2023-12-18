@@ -35,7 +35,7 @@ export function FollowUnfollowButton({
         isFollowing(follower, followed).then((isFollowing) => {
             setIsFollowingState(isFollowing);
         });
-    }, []);
+    }, [follower, followed]);
 
     const buttonMessage = isFollowingState ? "Deixar de seguir" : "Seguir";
     const buttonType = isFollowingState ? "destructive" : "default";

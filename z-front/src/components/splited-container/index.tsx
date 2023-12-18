@@ -22,7 +22,7 @@ export function SplitedContainer({
 
     return (
         <div className={cn("flex w-full p-4", className)}>
-            <Link href="#" className="px-4">
+            <Link href={`/profile/${profile}`} className="px-4">
                 {profileAvatar}
             </Link>
             <div className="flex flex-col w-full justify-center m-auto gap-4">
