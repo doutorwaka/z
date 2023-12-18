@@ -1,4 +1,5 @@
 import { CreateProfileIfNotExists } from "./auth";
+import { getProfile } from "./profile";
 import { createTweet } from "./tweet";
 
 export const services = {
@@ -7,5 +8,8 @@ export const services = {
     },
     tweet: {
         create: createTweet,
+    },
+    profile: {
+        get: getProfile,
     },
 };
