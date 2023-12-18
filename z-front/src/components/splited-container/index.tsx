@@ -11,7 +11,7 @@ export function SplitedContainer({ children }: { children: React.ReactNode }) {
     )
 
     return (
-        <div className="flex w-full p-4">
+        <div className="flex w-full p-4 border-b-2 border-muted">
             <Link href="#" className="px-4">
                 {profileAvatar}
             </Link>
