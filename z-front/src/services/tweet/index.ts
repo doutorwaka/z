@@ -50,3 +50,27 @@ export async function listTweetsFromProfile({
         throw e;
     }
 }
+
+export type ListTweetsFromFollowsResponseDto = {
+    tweets: {
+        id: string;
+        content: string;
+        author_id: string;
+        author_login: string;
+        likes: number;
+        views: number;
+        created_at: Date;
+    }[];
+};
+
+export async function listTweetsFromFollows({
+    profile,
+}: ListTweetsFromProfileProps) {
+    try {
+        const response = await backend.get(`/tweets/${profile}/follows/list`);
+        const responseData = response.data as ListTweetsFromFollowsResponseDto;
+        return responseData;
+    } catch (e) {
+        throw e;
+    }
+}

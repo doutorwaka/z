@@ -1,6 +1,6 @@
 import { CreateProfileIfNotExists } from "./auth";
 import { getProfile } from "./profile";
-import { createTweet, listTweetsFromProfile } from "./tweet";
+import { createTweet, listTweetsFromFollows, listTweetsFromProfile } from "./tweet";
 
 export const services = {
     auth: {
@@ -9,6 +9,7 @@ export const services = {
     tweet: {
         create: createTweet,
         listFromProfile: listTweetsFromProfile,
+        listFromFollows: listTweetsFromFollows,
     },
     profile: {
         get: getProfile,
