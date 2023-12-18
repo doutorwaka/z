@@ -1,5 +1,15 @@
 import { Input } from "@/components/ui/input";
+import { services } from "@/services";
 import { Search } from "lucide-react";
+
+async function searchProfile(profile: string) {
+    try {
+        const { profiles } = await services.profile.search({ profile });
+        return profiles;
+    } catch (error) {
+        return [];
+    }
+}
 
 export function PageSearch() {
     return (

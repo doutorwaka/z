@@ -94,13 +94,15 @@ export type SearchProfileProps = {
     profile: string;
 };
 
+export type ProfileDto = {
+    id: string;
+    name: string;
+    email: string;
+    login: string;
+};
+
 export type SearchProfileResponseDto = {
-    profiles: {
-        id: string;
-        name: string;
-        email: string;
-        login: string;
-    }[];
+    profiles: ProfileDto[];
 };
 
 export async function searchProfile({ profile }: SearchProfileProps) {
@@ -108,7 +110,7 @@ export async function searchProfile({ profile }: SearchProfileProps) {
 
     try {
         const response = await backend.post(`/profiles/search`, data);
-        const responseData = response.data as SearchProfileResponseDto
+        const responseData = response.data as SearchProfileResponseDto;
         return responseData;
     } catch (e) {
         const error = e as AxiosError;
