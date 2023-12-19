@@ -18,7 +18,7 @@ export function SplitedContainer({
     const profileAvatar = (
         <Avatar>
             <AvatarImage src={`http://github.com/${profile}.png`} />
-            <AvatarFallback>D</AvatarFallback>
+            <AvatarFallback>{profile.at(0)?.toUpperCase()}</AvatarFallback>
         </Avatar>
     );
 
