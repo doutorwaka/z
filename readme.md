@@ -1,4 +1,7 @@
-# 💰 Z - Plataforma Social
+# 🙋‍♂️ Z - Plataforma Social
+
+![z-4](https://github.com/doutorwaka/z/assets/107580593/ac1714f2-6f98-42f4-ac46-6c37b95310bc)
+
 Este repositório contêm o *backend* e o *frontend* da aplicação construída na [Semana Fullstack Masterclass do Dr. Waka](http://doutorwaka.tech/semana-fullstack-masterclass-2).
 
 Para assistir as vídeo aulas da construção do projeto, basta acessar [aulas](http://doutorwaka.tech/semana-fullstack-masterclass-2).
@@ -12,11 +15,15 @@ As principais funcionalidades da plataforma original foram mantidas e várias ou
 
 A arquitetura geral do projeto é como ilustrado na imagem abaixo:
 
+![arquitetura](https://github.com/doutorwaka/z/assets/107580593/61cedd12-0064-4fa0-88f5-72aa90e2a6e4)
+
 Note que utilizaremos o ```Github``` como servidor de identidade e faremos a autenticação do usuário utilizando [next-auth](https://next-auth.js.org/). O usuário será efetivamente criado em nosso *backend* caso seja seu primeir acesso a plataforma.
 
 ## Domínio do problema
 
 O domínio do problema segue o esquema da imagem abaixo:
+
+![dominio](https://github.com/doutorwaka/z/assets/107580593/da99a7bc-7e5a-41b6-a3b3-38522313ff73)
 
 Uma vez que estamos tratando de uma plataforma social que é um clone do [Twitter](https://twitter.com) em um escopo reduzido, abordaremos os seguintes casos de uso:
 
@@ -32,6 +39,8 @@ Uma vez que estamos tratando de uma plataforma social que é um clone do [Twitte
 O *backend* do sistema foi construído utilizando ```JAVA``` e ```Spring Framework```. Para gerenciar as dependências da aplicação foi utilizado ```Gradle```.
 
 A aplicação foi construída seguindo o modelo de camadas **MVC**, conforme ilustrado pela figura abaixo:
+
+![mvc](https://github.com/doutorwaka/z/assets/107580593/40eea212-1d3f-465b-a446-a36678064179)
 
 Para o **backend**, uma **API Rest** foi construída, disponibilizando diversos ***endpoints*** que possibilitam a correta execução dos casos de uso descritos na seção anterior.
 
