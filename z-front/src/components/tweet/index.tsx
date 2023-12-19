@@ -1,10 +1,10 @@
 "use client";
 
-import { MessageCircle, Repeat2, Heart, BarChart2 } from "lucide-react";
+import { MessageCircle, Repeat2, Heart, BarChart2, HeartOff } from "lucide-react";
 import { SplitedContainer } from "../splited-container";
 import { ProfileCard } from "./profile-card";
 import { services } from "@/services";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type TweetProps = {
     id: string;
@@ -37,7 +37,6 @@ function formatDate(date: Date) {
 var alreadyAddedView = false;
 
 async function addView(tweetId: string) {
-
     if (alreadyAddedView) {
         return;
     }
@@ -51,7 +50,9 @@ async function addView(tweetId: string) {
 }
 
 export function Tweet(props: TweetProps) {
-    addView(props.id);
+    useEffect(() => {
+        addView(props.id);
+    }, [props.id]);
 
     const [isLiked, setIsLiked] = useState(false);
 
@@ -97,11 +98,20 @@ export function Tweet(props: TweetProps) {
                     </div>
 
                     <div className="flex gap-2 w-max items-center">
-                        <Heart
-                            size={16}
-                            className="hover:stroke-red-500 hover:cursor-pointer"
-                            onClick={() => handleLike()}
-                        />
+                        {isLiked ? (
+                            <HeartOff
+                                size={16}
+                                className="stroke-red-500 hover:stroke-primary-foreground hover:cursor-pointer"
+                                onClick={() => handleLike()}
+                            />
+                        ) : (
+                            <Heart
+                                size={16}
+                                className="hover:stroke-red-500 hover:cursor-pointer"
+                                onClick={() => handleLike()}
+                            />
+                        )}
+
                         <span className="font-light">{props.likes}</span>
                     </div>
 
