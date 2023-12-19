@@ -1,7 +1,10 @@
+"use client";
+
 import { MessageCircle, Repeat2, Heart, BarChart2 } from "lucide-react";
 import { SplitedContainer } from "../splited-container";
 import { ProfileCard } from "./profile-card";
 import { services } from "@/services";
+import { useState } from "react";
 
 export type TweetProps = {
     id: string;
@@ -31,8 +34,16 @@ function formatDate(date: Date) {
     }
 }
 
+var alreadyAddedView = false;
+
 async function addView(tweetId: string) {
+
+    if (alreadyAddedView) {
+        return;
+    }
+
     try {
+        alreadyAddedView = true;
         await services.tweet.view({ id: tweetId });
     } catch (error) {
         console.log(error);
@@ -41,6 +52,20 @@ async function addView(tweetId: string) {
 
 export function Tweet(props: TweetProps) {
     addView(props.id);
+
+    const [isLiked, setIsLiked] = useState(false);
+
+    function handleLike() {
+        if (isLiked) {
+            props.likes--;
+            services.tweet.unlike({ id: props.id });
+        } else {
+            services.tweet.like({ id: props.id });
+            props.likes++;
+        }
+
+        setIsLiked(!isLiked);
+    }
 
     return (
         <SplitedContainer
@@ -62,26 +87,26 @@ export function Tweet(props: TweetProps) {
 
                 <div className="flex w-full justify-between">
                     <div className="flex gap-2 w-max items-center">
-                        <MessageCircle />
-                        <span className="font-light">
-                            {Math.floor(Math.random() * 100)}
-                        </span>
+                        <MessageCircle size={16} />
+                        <span className="font-light">13</span>
                     </div>
 
                     <div className="flex gap-2 w-max items-center">
-                        <Repeat2 />
-                        <span className="font-light">
-                            {Math.floor(Math.random() * 100)}
-                        </span>
+                        <Repeat2 size={16} />
+                        <span className="font-light">15</span>
                     </div>
 
                     <div className="flex gap-2 w-max items-center">
-                        <Heart />
+                        <Heart
+                            size={16}
+                            className="hover:stroke-red-500 hover:cursor-pointer"
+                            onClick={() => handleLike()}
+                        />
                         <span className="font-light">{props.likes}</span>
                     </div>
 
                     <div className="flex gap-2 w-max items-center">
-                        <BarChart2 />
+                        <BarChart2 size={16} />
                         <span className="font-light">{props.views}</span>
                     </div>
                 </div>
